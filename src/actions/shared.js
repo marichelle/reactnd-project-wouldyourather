@@ -1,4 +1,4 @@
-import { _getQuestions, _getUsers } from '../utils/_DATA';
+import { getInitialData } from '../utils/api';
 import { receiveQuestions } from './questions';
 import { receiveUsers } from './users';
 import { setAuthorizedUser } from './authorizedUser';
@@ -9,13 +9,12 @@ const AUTHORIZED_ID = 'johndoe';
 export const RECEIVE_DATA = 'RECEIVE DATA';
 
 export const handleInitialData = () => {
-  return dispatch => {
-    return Promise.all([_getQuestions(), _getUsers()]).then(
-      ([questions, users]) => {
-        dispatch(receiveQuestions(questions));
-        dispatch(receiveUsers(users));
-        dispatch(setAuthorizedUser(AUTHORIZED_ID));
-      }
-    );
+  // redux thunk pattern
+  return (dispatch) => {
+    return getInitialData().then(({ users, questions }) => {
+      dispatch(receiveUsers(users));
+      dispatch(receiveQuestions(questions));
+      dispatch(setAuthorizedUser(AUTHORIZED_ID));
+    });
   };
 };
