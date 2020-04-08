@@ -19,6 +19,8 @@ class Dashboard extends React.Component {
   };
 
   handleTabLink = (e, activeTab) => {
+    e.preventDefault();
+
     this.setState((currState, currProps) => ({
       activeTab,
     }));
