@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
         <div className="three column row">
           <div className="four wide column"></div>
           <div className="eight wide column">
-            <div className="ui top attached tabular menu">
+            <div className="ui attached tabular top two item menu">
               {tabs.map((tab) => (
                 <a
                   key={tab.id}
