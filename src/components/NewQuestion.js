@@ -40,8 +40,6 @@ class NewQuestion extends React.Component {
       optionOneText: '',
       optionTwoText: '',
     }));
-
-    console.log('this.state', this.state);
   };
 
   render() {
