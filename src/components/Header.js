@@ -7,6 +7,7 @@
 */
 
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
   const { activeUser } = props;
@@ -21,9 +22,13 @@ const Header = (props) => {
   return (
     <div id="header">
       <div className="ui secondary pointing menu">
-        <a className="item active">Home</a>
+        <NavLink activeClassName="active" className="item" to="/" exact>
+          Home
+        </NavLink>
         <a className="item">Leaderboard</a>
-        <a className="item">New Question</a>
+        <NavLink activeClassName="active" className="item" to="/add" exact>
+          New Question
+        </NavLink>
         <div className="right menu">
           <span className="ui item">
             <span>{name !== '' ? `Hello, ${name}!` : ''}</span>

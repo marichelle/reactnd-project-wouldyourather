@@ -8,12 +8,14 @@ or
 <submit button>
 */
 
-import React from 'react';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
-class NewQuestion extends React.Component {
+class NewQuestion extends Component {
   state = {
     optionOneText: '',
     optionTwoText: '',
+    toHome: false,
   };
 
   handleChange = (e) => {
@@ -39,11 +41,17 @@ class NewQuestion extends React.Component {
     this.setState(() => ({
       optionOneText: '',
       optionTwoText: '',
+      toHome: true,
     }));
   };
 
   render() {
-    const { optionOneText, optionTwoText } = this.state;
+    const { optionOneText, optionTwoText, toHome } = this.state;
+
+    /* Redirect to root if submitted */
+    if (toHome === true) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <form className="ui form" onSubmit={this.handleSubmit}>
