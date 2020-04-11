@@ -8,6 +8,7 @@ import Header from './Header';
 import LoginForm from './LoginForm';
 import Leaderboard from './Leaderboard';
 import NewQuestion from './NewQuestion';
+import QuestionPage from './QuestionPage';
 import LoadingBar from 'react-redux-loading';
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/add" component={NewQuestion} />
                 <Route path="/leaderboard" component={Leaderboard} />
+                <Route path="/question/:id" component={QuestionPage} />
               </div>
             ) : (
               <LoginForm />

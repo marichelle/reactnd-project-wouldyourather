@@ -1,25 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { formatQuestion } from '../utils/helper';
+import { Link } from 'react-router-dom';
 
 class Question extends React.Component {
-  redirectToPDP = (e, id) => {
-    e.preventDefault();
-
-    // todo: redirect to poll detail page
-    console.log('id', id);
-  };
-
   render() {
-    const {
-      id,
-      author,
-      avatar,
-      optionOne,
-      optionTwo,
-      timestamp,
-      isAnswered,
-    } = this.props;
+    const { id, author, avatar, optionOne, optionTwo, timestamp } = this.props;
 
     return (
       <div className="card">
@@ -36,12 +22,9 @@ class Question extends React.Component {
           </div>
         </div>
         <div className="extra content">
-          <div
-            className="fluid ui basic green button"
-            onClick={(e) => this.redirectToPDP(e, id)}
-          >
+          <Link className="fluid ui basic green button" to={`/question/${id}`}>
             View Poll
-          </div>
+          </Link>
         </div>
       </div>
     );
