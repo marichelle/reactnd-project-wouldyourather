@@ -9,7 +9,9 @@ or
 */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { handleAddQuestion } from '../actions/questions';
 
 class NewQuestion extends Component {
   state = {
@@ -31,11 +33,11 @@ class NewQuestion extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
+    const { dispatch } = this.props;
     const { optionOneText, optionTwoText } = this.state;
 
     // todo: add question to store
-    console.log('New Question Option 1: ', optionOneText);
-    console.log('New Question Option 2: ', optionTwoText);
+    dispatch(handleAddQuestion(optionOneText, optionTwoText));
 
     // reset state
     this.setState(() => ({
@@ -94,4 +96,4 @@ class NewQuestion extends Component {
   }
 }
 
-export default NewQuestion;
+export default connect()(NewQuestion);

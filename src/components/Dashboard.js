@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
     const { activeTab, tabs } = this.state;
 
     return (
-      <div className="ui grid dashboard-list">
+      <div className="ui grid">
         <div className="three column row">
           <div className="four wide column"></div>
           <div className="eight wide column">

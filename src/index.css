@@ -1,3 +1,9 @@
+.container {
+  margin: 1.5em 0;
+}
+
+/* HEADER */
+
 #header span.item {
   padding: 0.35em;
 }

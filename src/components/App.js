@@ -5,8 +5,10 @@ import { handleInitialData } from '../actions/shared';
 
 import Dashboard from './Dashboard';
 import Header from './Header';
-import LoadingBar from 'react-redux-loading';
+import LoginForm from './LoginForm';
+import Leaderboard from './Leaderboard';
 import NewQuestion from './NewQuestion';
+import LoadingBar from 'react-redux-loading';
 
 class App extends Component {
   componentDidMount() {
@@ -21,12 +23,15 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           <div className="container">
-            <Header activeUser={activeUser} />
-            {activeUser !== null && (
+            {activeUser !== null ? (
               <div>
+                <Header activeUser={activeUser} />
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/add" component={NewQuestion} />
+                <Route path="/leaderboard" component={Leaderboard} />
               </div>
+            ) : (
+              <LoginForm />
             )}
           </div>
         </Fragment>
