@@ -10,7 +10,11 @@ class Question extends React.Component {
     return (
       <div className="card">
         <div className="content">
-          <img className="left floated ui avatar image" src={avatar} />
+          <img
+            className="left floated ui avatar image"
+            src={avatar}
+            alt={`Avatar of ${author}`}
+          />
           <div className="header">{author}</div>
           <div className="meta">{timestamp}</div>
         </div>

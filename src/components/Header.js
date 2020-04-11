@@ -15,7 +15,10 @@ class Header extends Component {
   handleLogout = (e) => {
     e.preventDefault();
 
-    const { dispatch, history } = this.props;
+    const { cookies, dispatch, history } = this.props;
+
+    // remove user cookie
+    cookies.remove('user-id', { path: '/' });
 
     // reset authorized user
     dispatch(setAuthorizedUser());
@@ -57,7 +60,7 @@ class Header extends Component {
                 />
               )}
             </span>
-            <a className="ui item" onClick={this.handleLogout}>
+            <a className="ui item" href="/#" onClick={this.handleLogout}>
               Logout
             </a>
           </div>
@@ -68,4 +71,10 @@ class Header extends Component {
   }
 }
 
-export default withRouter(connect()(Header));
+function mapStateToProps(state, props) {
+  return {
+    cookies: props.cookies,
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(Header));

@@ -38,6 +38,7 @@ class Dashboard extends React.Component {
             <div className="ui attached tabular top two item menu">
               {tabs.map((tab) => (
                 <a
+                  href="/#"
                   key={tab.id}
                   className={'item' + (activeTab === tab.id ? ' active' : '')}
                   data-tab={tab.id}

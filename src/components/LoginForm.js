@@ -26,11 +26,17 @@ class LoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { dispatch } = this.props;
+    const { cookies, dispatch } = this.props;
     const { userId } = this.state;
 
     if (userId !== '') {
+      //setting a cookie
+      cookies.set('user-id', userId, { path: '/' });
+
+      // authorize user
       dispatch(setAuthorizedUser(userId));
+
+      // redirect to root
     }
   };
 
@@ -85,8 +91,9 @@ class LoginForm extends Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users }, props) {
   return {
+    cookies: props.cookies,
     users: Object.keys(users)
       .map((user) => users[user])
       .sort((a, b) => (a.name > b.name ? 1 : -1)),

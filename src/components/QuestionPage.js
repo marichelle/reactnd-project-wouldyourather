@@ -2,21 +2,32 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import AnswerForm from './AnswerForm';
+import AnswerResults from './AnswerResults';
 
 class QuestionPage extends React.Component {
   render() {
-    const { id } = this.props;
+    const { id, answered } = this.props;
 
     return (
       <div className="ui one cards centered raised">
-        <AnswerForm key={id} id={id} />
+        {answered !== true ? (
+          <AnswerForm key={id} id={id} />
+        ) : (
+          <AnswerResults key={id} id={id} />
+        )}
       </div>
     );
   }
 }
 
-function mapStateToProps({ questions }, props) {
-  return { id: props.match.params.id };
+function mapStateToProps({ authorizedUser, questions, users }, props) {
+  const { id } = props.match.params;
+  const answered = users[authorizedUser].answers.hasOwnProperty(id);
+
+  return {
+    id,
+    answered,
+  };
 }
 
 export default connect(mapStateToProps)(QuestionPage);

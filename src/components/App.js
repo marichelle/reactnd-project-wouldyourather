@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withCookies } from 'react-cookie';
 import { handleInitialData } from '../actions/shared';
 
 import Dashboard from './Dashboard';
@@ -13,11 +14,13 @@ import LoadingBar from 'react-redux-loading';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    const { cookies } = this.props;
+
+    this.props.dispatch(handleInitialData(cookies.get('user-id')));
   }
 
   render() {
-    const { activeUser } = this.props;
+    const { activeUser, cookies } = this.props;
 
     return (
       <Router>
@@ -26,14 +29,14 @@ class App extends Component {
           <div className="container">
             {activeUser !== null ? (
               <div>
-                <Header activeUser={activeUser} />
+                <Header activeUser={activeUser} cookies={cookies} />
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/add" component={NewQuestion} />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route path="/question/:id" component={QuestionPage} />
               </div>
             ) : (
-              <LoginForm />
+              <LoginForm cookies={cookies} />
             )}
           </div>
         </Fragment>
@@ -50,4 +53,4 @@ function mapStateToProps({ authorizedUser, users }) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+export default withCookies(connect(mapStateToProps)(App));

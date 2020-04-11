@@ -17,7 +17,7 @@ class NewQuestion extends Component {
   state = {
     optionOneText: '',
     optionTwoText: '',
-    toHome: false,
+    redirect: null,
   };
 
   handleChange = (e) => {
@@ -36,23 +36,23 @@ class NewQuestion extends Component {
     const { dispatch } = this.props;
     const { optionOneText, optionTwoText } = this.state;
 
-    // todo: add question to store
+    // add question to store
     dispatch(handleAddQuestion(optionOneText, optionTwoText));
 
     // reset state
     this.setState(() => ({
       optionOneText: '',
       optionTwoText: '',
-      toHome: true,
+      redirect: '/',
     }));
   };
 
   render() {
-    const { optionOneText, optionTwoText, toHome } = this.state;
+    const { optionOneText, optionTwoText, redirect } = this.state;
 
     /* Redirect to root if submitted */
-    if (toHome === true) {
-      return <Redirect to="/" />;
+    if (redirect) {
+      return <Redirect to={redirect} />;
     }
 
     return (

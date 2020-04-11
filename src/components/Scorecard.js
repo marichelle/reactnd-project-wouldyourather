@@ -25,7 +25,7 @@ export default (props) => {
             <div className="ui segment">
               <img
                 src={avatarURL}
-                alt="{`Avatar of ${name}`}"
+                alt={`Avatar of ${name}`}
                 className="ui tiny centered circular image"
               />
             </div>

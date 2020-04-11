@@ -10,6 +10,8 @@ Would you rather...
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { handleAddAnswer } from '../actions/users';
+
 class AnswerForm extends Component {
   state = {
     answer: '',
@@ -25,13 +27,23 @@ class AnswerForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    const { dispatch, question } = this.props;
+    const { answer } = this.state;
+
+    dispatch(handleAddAnswer(answer, question.id));
+
+    // reset state
+    this.setState(() => ({
+      answer: '',
+    }));
   };
 
   render() {
     const questionKeys = ['optionOne', 'optionTwo'];
     const { author, authorizedUser, question } = this.props;
     const { id, name, avatarURL } = author;
-    const { answer } = this.state;
+    const { answer, redirect } = this.state;
 
     return (
       <form className="ui form" onSubmit={this.handleSubmit}>
@@ -80,12 +92,15 @@ class AnswerForm extends Component {
 }
 
 function mapStateToProps({ authorizedUser, questions, users }, props) {
-  const question = questions[props.id];
+  const { id } = props;
+  const question = questions[id];
+  const answered = users[authorizedUser].answers.hasOwnProperty(id);
 
   return {
     author: users[question.author],
     authorizedUser,
     question,
+    answered,
   };
 }
 
