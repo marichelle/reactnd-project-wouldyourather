@@ -43,7 +43,7 @@ class AnswerForm extends Component {
     const questionKeys = ['optionOne', 'optionTwo'];
     const { author, authorizedUser, question } = this.props;
     const { id, name, avatarURL } = author;
-    const { answer, redirect } = this.state;
+    const { answer } = this.state;
 
     return (
       <form className="ui form" onSubmit={this.handleSubmit}>

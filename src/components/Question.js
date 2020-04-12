@@ -26,7 +26,7 @@ class Question extends React.Component {
           </div>
         </div>
         <div className="extra content">
-          <Link className="fluid ui basic green button" to={`/question/${id}`}>
+          <Link className="fluid ui basic teal button" to={`/question/${id}`}>
             View Poll
           </Link>
         </div>
