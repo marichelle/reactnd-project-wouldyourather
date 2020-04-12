@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
+import Error404 from './Error404';
 import Header from './Header';
 import LoginForm from './LoginForm';
 import Leaderboard from './Leaderboard';
 import NewQuestion from './NewQuestion';
-import NotFound from './NotFound';
 import QuestionPage from './QuestionPage';
 import LoadingBar from 'react-redux-loading';
 
@@ -37,7 +37,7 @@ class App extends Component {
                   <Route path="/add" component={NewQuestion} />
                   <Route path="/leaderboard" component={Leaderboard} />
                   <Route path="/question/:id" component={QuestionPage} />
-                  <Route component={NotFound} />
+                  <Route component={Error404} />
                 </Switch>
               </div>
             ) : (

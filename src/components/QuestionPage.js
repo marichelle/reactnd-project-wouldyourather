@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import AnswerForm from './AnswerForm';
 import AnswerResults from './AnswerResults';
-import NotFound from './NotFound';
+import Error404 from './Error404';
 
 class QuestionPage extends React.Component {
   render() {
@@ -18,7 +18,7 @@ class QuestionPage extends React.Component {
             <AnswerResults key={id} id={id} />
           )
         ) : (
-          <NotFound />
+          <Error404 />
         )}
       </div>
     );

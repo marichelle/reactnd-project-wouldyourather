@@ -33,12 +33,12 @@ export default (props) => {
               <table className="ui very basic table">
                 <tbody>
                   <tr>
-                    <td>Answered Questions:</td>
-                    <td>{answered}</td>
-                  </tr>
-                  <tr>
                     <td>Created Questions:</td>
                     <td>{created}</td>
+                  </tr>
+                  <tr>
+                    <td>Answered Questions:</td>
+                    <td>{answered}</td>
                   </tr>
                 </tbody>
               </table>

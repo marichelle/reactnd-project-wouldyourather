@@ -6,7 +6,6 @@ Sign In
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { setAuthorizedUser } from '../actions/authorizedUser';
 
 class LoginForm extends Component {
@@ -27,7 +26,7 @@ class LoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { cookies, dispatch, history } = this.props;
+    const { dispatch } = this.props;
     const { userId } = this.state;
 
     if (userId !== '') {
@@ -102,4 +101,4 @@ function mapStateToProps({ users }, props) {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(LoginForm));
+export default connect(mapStateToProps)(LoginForm);
