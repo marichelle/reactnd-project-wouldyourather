@@ -37,8 +37,8 @@ class LoginForm extends Component {
       // configure userId cookie (disable to comply with Login Flow specifications)
       // cookies.set('user-id', userId, { path: '/' });
 
-      // redirect to root
-      history.push('/');
+      // redirect to root (disable to comply with Application Functionality specifications)
+      // history.push('/');
     }
   };
 

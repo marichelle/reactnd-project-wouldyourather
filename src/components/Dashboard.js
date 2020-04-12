@@ -86,7 +86,7 @@ function mapStateToProps({ authorizedUser, questions, users }) {
     answered: activeUser ? Object.keys(users[authorizedUser].answers) : [],
     // sort questions from newest to oldest
     questionIds: Object.keys(questions).sort(
-      (a, b) => questions[a].timestamp - questions[b].timestamp
+      (a, b) => questions[b].timestamp - questions[a].timestamp
     ),
   };
 }
