@@ -26,14 +26,18 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
   return (dispatch, getState) => {
     const { authorizedUser } = getState();
 
+    dispatch(showLoading());
+
     return saveQuestion({
       optionOneText,
       optionTwoText,
       author: authorizedUser,
-    }).then((question) => {
-      dispatch(addQuestion(question));
-      dispatch(addUserQuestion(question));
-    });
+    })
+      .then((question) => {
+        dispatch(addQuestion(question));
+        dispatch(addUserQuestion(question));
+      })
+      .then(() => dispatch(hideLoading()));
   };
 }
 
@@ -41,15 +45,19 @@ export function handleAddAnswer(answer, questionId) {
   return (dispatch, getState) => {
     const { authorizedUser } = getState();
 
+    dispatch(showLoading());
+
     return saveQuestionAnswer({
       authedUser: authorizedUser,
       qid: questionId,
       answer,
-    }).then(() => {
-      const qa = { answer, authorizedUser, questionId };
+    })
+      .then(() => {
+        const qa = { answer, authorizedUser, questionId };
 
-      dispatch(addAnswer(qa));
-      dispatch(addUserAnswer(qa));
-    });
+        dispatch(addAnswer(qa));
+        dispatch(addUserAnswer(qa));
+      })
+      .then(() => dispatch(hideLoading()));
   };
 }

@@ -6,6 +6,7 @@ Sign In
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { setAuthorizedUser } from '../actions/authorizedUser';
 
 class LoginForm extends Component {
@@ -26,17 +27,18 @@ class LoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { cookies, dispatch } = this.props;
+    const { cookies, dispatch, history } = this.props;
     const { userId } = this.state;
 
     if (userId !== '') {
-      //setting a cookie
-      cookies.set('user-id', userId, { path: '/' });
-
       // authorize user
       dispatch(setAuthorizedUser(userId));
 
+      // configure userId cookie (disable to comply with Login Flow specifications)
+      // cookies.set('user-id', userId, { path: '/' });
+
       // redirect to root
+      history.push('/');
     }
   };
 
@@ -100,4 +102,4 @@ function mapStateToProps({ users }, props) {
   };
 }
 
-export default connect(mapStateToProps)(LoginForm);
+export default withRouter(connect(mapStateToProps)(LoginForm));

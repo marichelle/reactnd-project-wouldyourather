@@ -6,7 +6,24 @@ import Question from './Question';
 class Dashboard extends React.Component {
   state = {
     activeTab: 'unanswered',
-    tabs: [
+  };
+
+  handleTabLink = (e, activeTab) => {
+    e.preventDefault();
+
+    this.setState(() => ({
+      activeTab,
+    }));
+  };
+
+  render() {
+    const { answered, questionIds } = this.props;
+    const { activeTab } = this.state;
+    const questions = {
+      answered: questionIds.filter((id) => answered.includes(id)),
+      unanswered: questionIds.filter((id) => !answered.includes(id)),
+    };
+    const tabs = [
       {
         id: 'answered',
         name: 'Answered',
@@ -15,20 +32,7 @@ class Dashboard extends React.Component {
         id: 'unanswered',
         name: 'Unanswered',
       },
-    ],
-  };
-
-  handleTabLink = (e, activeTab) => {
-    e.preventDefault();
-
-    this.setState((currState, currProps) => ({
-      activeTab,
-    }));
-  };
-
-  render() {
-    const { answered, questionIds } = this.props;
-    const { activeTab, tabs } = this.state;
+    ];
 
     return (
       <div className="ui grid">
@@ -58,15 +62,13 @@ class Dashboard extends React.Component {
                 data-tab={tab.id}
               >
                 <div className="ui one cards centered raised">
-                  {questionIds
-                    .filter((id) =>
-                      tab.id === 'answered'
-                        ? answered.includes(id)
-                        : !answered.includes(id)
-                    )
-                    .map((id) => (
-                      <Question key={id} id={id} />
-                    ))}
+                  {questions[tab.id].length ? (
+                    questions[tab.id].map((id) => <Question key={id} id={id} />)
+                  ) : (
+                    <div className="no-results">
+                      No {tab.id} questions exist!
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

@@ -11,3 +11,9 @@
 #header img.avatar {
   margin-left: 0.7em;
 }
+
+/* DASHBOARD */
+
+.no-results {
+  padding: 3em 0;
+}
