@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+
 import { setAuthorizedUser } from '../actions/authorizedUser';
 
 class Header extends Component {
@@ -17,11 +18,11 @@ class Header extends Component {
 
     const { cookies, dispatch, history } = this.props;
 
-    // remove user cookie
-    cookies.remove('user-id', { path: '/' });
-
     // reset authorized user
     dispatch(setAuthorizedUser());
+
+    // remove user cookie
+    cookies.remove('user-id', { path: '/' });
 
     // redirect to root
     history.push('/');
@@ -29,13 +30,7 @@ class Header extends Component {
 
   render() {
     const { activeUser } = this.props;
-    let avatar = '';
-    let name = '';
-
-    if (activeUser !== null) {
-      avatar = activeUser.avatarURL;
-      name = activeUser.name;
-    }
+    const { avatarURL, name } = activeUser;
 
     return (
       <div id="header">
@@ -51,11 +46,11 @@ class Header extends Component {
           </NavLink>
           <div className="right menu">
             <span className="ui item">
-              <span>{name !== '' ? `Hello, ${name}!` : ''}</span>
-              {avatar !== '' && (
+              <span>{activeUser !== null ? `Hello, ${name}!` : ''}</span>
+              {activeUser !== null && (
                 <img
                   className="ui avatar image"
-                  src={avatar}
+                  src={avatarURL}
                   alt={`Avatar of ${name}`}
                 />
               )}

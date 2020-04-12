@@ -1,12 +1,10 @@
-import { getInitialData } from '../utils/api';
-import { receiveQuestions } from './questions';
-import { receiveUsers } from './users';
+import { addAnswer, addQuestion, receiveQuestions } from './questions';
+import { addUserAnswer, addUserQuestion, receiveUsers } from './users';
+import { getInitialData, saveQuestion, saveQuestionAnswer } from '../utils/api';
 import { setAuthorizedUser } from './authorizedUser';
 import { hideLoading, showLoading } from 'react-redux-loading';
 
 export const handleInitialData = (userId) => {
-  console.log('user-id cookie val: ', userId);
-
   // redux thunk pattern
   return (dispatch) => {
     dispatch(showLoading());
@@ -23,3 +21,35 @@ export const handleInitialData = (userId) => {
     });
   };
 };
+
+export function handleAddQuestion(optionOneText, optionTwoText) {
+  return (dispatch, getState) => {
+    const { authorizedUser } = getState();
+
+    return saveQuestion({
+      optionOneText,
+      optionTwoText,
+      author: authorizedUser,
+    }).then((question) => {
+      dispatch(addQuestion(question));
+      dispatch(addUserQuestion(question));
+    });
+  };
+}
+
+export function handleAddAnswer(answer, questionId) {
+  return (dispatch, getState) => {
+    const { authorizedUser } = getState();
+
+    return saveQuestionAnswer({
+      authedUser: authorizedUser,
+      qid: questionId,
+      answer,
+    }).then(() => {
+      const qa = { answer, authorizedUser, questionId };
+
+      dispatch(addAnswer(qa));
+      dispatch(addUserAnswer(qa));
+    });
+  };
+}

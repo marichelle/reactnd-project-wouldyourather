@@ -9,8 +9,7 @@ Would you rather...
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { handleAddAnswer } from '../actions/users';
+import { handleAddAnswer } from '../actions/shared';
 
 class AnswerForm extends Component {
   state = {

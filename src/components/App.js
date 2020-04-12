@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { withCookies } from 'react-cookie';
-import { handleInitialData } from '../actions/shared';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import Header from './Header';
@@ -12,11 +11,13 @@ import NewQuestion from './NewQuestion';
 import QuestionPage from './QuestionPage';
 import LoadingBar from 'react-redux-loading';
 
+import { handleInitialData } from '../actions/shared';
+
 class App extends Component {
   componentDidMount() {
-    const { cookies } = this.props;
+    const { cookies, dispatch } = this.props;
 
-    this.props.dispatch(handleInitialData(cookies.get('user-id')));
+    dispatch(handleInitialData(cookies.get('user-id')));
   }
 
   render() {
