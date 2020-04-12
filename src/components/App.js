@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -26,7 +26,7 @@ class App extends Component {
 
     return (
       <Router>
-        <Fragment>
+        <>
           <LoadingBar />
           <div className="container">
             {activeUser !== null ? (
@@ -44,7 +44,7 @@ class App extends Component {
               <LoginForm cookies={cookies} />
             )}
           </div>
-        </Fragment>
+        </>
       </Router>
     );
   }

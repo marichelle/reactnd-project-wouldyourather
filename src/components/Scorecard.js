@@ -5,7 +5,7 @@ Created Questions: #
 Total Score: #
 */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 
 export default (props) => {
   const { position, user } = props;
@@ -13,7 +13,7 @@ export default (props) => {
   const trophyColor = position === 1 ? 'yellow' : 'inverted';
 
   return (
-    <Fragment>
+    <>
       <div className="four wide column"></div>
       <div className="eight wide column">
         <div className="ui segments">
@@ -53,6 +53,6 @@ export default (props) => {
         </div>
       </div>
       <div className="four wide column"></div>
-    </Fragment>
+    </>
   );
 };
